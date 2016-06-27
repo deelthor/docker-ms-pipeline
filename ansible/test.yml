@@ -1,0 +1,25 @@
+---
+- name: Get IP app01
+  hosts: localhost
+  tasks:
+    - shell: "docker-machine ip app01" 
+      register: dockerip_app01
+    - shell: 'docker-machine inspect --format=''{''{.Driver.SSHKeyPath''}''} app01'
+      register: sshkey_app01
+    - add_host: name="{{ dockerip_app01.stdout }}" groups=appgroup ansible_ssh_user=docker ansible_ssh_private_key_file="{{ sshkey_app01.stdout }}" 
+
+- name: Get IP app02
+  hosts: localhost
+  tasks:
+    - shell: "docker-machine ip app02" 
+      register: dockerip_app02
+    - shell: 'docker-machine inspect --format=''{''{.Driver.SSHKeyPath''}''} app02'
+      register: sshkey_app02
+    - add_host: name=192.168.99.103 groups=appgroup ansible_host=localhost ansible_user=docker ansible_ssh_private_key_file=/Users/thorstendeelmann/.docker/machine/machines/app02/id_rsa
+
+- name: Test
+  hosts: appgroup
+  tasks:
+    - command: /bin/echo foo
+    - file: path=/srv/test1 state=directory
+      become: yes
