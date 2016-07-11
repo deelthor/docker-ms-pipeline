@@ -1,0 +1,17 @@
+{
+  "builders":[{
+    "type": "docker",
+    "image": "jenkins",
+    "commit": "true",
+    "run_command": ["-d", "-i", "-t", "{{.Image}}"]
+  }],
+  "post-processors": [
+    [
+      {
+        "type": "docker-tag",
+        "repository": "thorsten/jenkins",
+        "tag": "0.1"
+      }
+    ]
+  ]
+}
