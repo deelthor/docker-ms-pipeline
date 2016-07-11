@@ -69,7 +69,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <finalName>Service</finalName>
+                    <finalName>service</finalName>
                 </configuration>
             </plugin>
             <plugin>
@@ -83,7 +83,7 @@
                         <resource>
                             <targetPath>/</targetPath>
                             <directory>${project.build.directory}</directory>
-                            <include>Service.jar</include>
+                            <include>service.jar</include>
                         </resource>
                     </resources>
                 </configuration>
