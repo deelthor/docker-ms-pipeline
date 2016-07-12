@@ -5,7 +5,7 @@ node('microservice-sample') {
   deleteDir()
  
   retry(5) {
-    git url: "https://github.com/deelthor/docker-ms-pipeline", branch: "master", poll: true"
+    git url: "https://github.com/deelthor/docker-ms-pipeline", branch: "master"
   }  
   
   stage 'BUILD'
